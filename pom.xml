@@ -7,6 +7,12 @@
     <groupId>com.lisen</groupId>
     <artifactId>springcloud</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <!-- 子模块 -->
+    <modules>
+        <module>cloud-provider-payment-8001</module>
+        <module>cloud-consumer-order-80</module>
+        <module>cloud-api-commons</module>
+    </modules>
     <packaging>pom</packaging>
 
     <!-- 统一管理jar包版本 -->
