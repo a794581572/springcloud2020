@@ -5,13 +5,10 @@ import com.lisen.springcloud.service.PaymentService;
 import com.lisen.springcloud.vo.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * @author lisen
@@ -23,10 +20,9 @@ import java.util.List;
 public class PaymentController {
     @Resource
     private PaymentService paymentService;
+
     @Value("${server.port}")
     private String serverPort;
-    @Resource
-    private DiscoveryClient discoveryClient;
 
     @RequestMapping(value = "/index")
     public HashMap index(){
@@ -62,21 +58,5 @@ public class PaymentController {
         }else {
             return new CommonResult(444, "无此记录，查询ID："+id, null);
         }
-    }
-
-    /**
-     * 服务发现,用于查询该服务的信息
-     * @return
-     */
-    @GetMapping("/discovery")
-    public Object discovery(){
-        // 获得注册中心的服务列表信息
-        List<String> services = discoveryClient.getServices();
-        services.forEach(service->log.info("****element****:{}",service));
-
-        // 通过服务名称获得实例列表信息(实例id,实例主机名,实例ip等等),集群环境一个服务有多个实例
-        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
-        instances.forEach(instance->log.info(instance.getServiceId()+"\t"+instance.getHost()+"\t"+instance.getUri()));
-        return this.discoveryClient;
     }
 }

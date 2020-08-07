@@ -20,7 +20,10 @@ import javax.annotation.Resource;
 @Slf4j
 @RequestMapping("/consumer/payment")
 public class OrderController {
-    public static final String PAYMENT_URL = "http://127.0.0.1:8001";
+    // 单节点可以使用ip:port
+//    public static final String PAYMENT_URL = "http://127.0.0.1:8001";
+    // 集群环境就不写ip:port了, 因为同一个服务有很多个实例, 我们只关注服务名称
+    public static final String PAYMENT_URL = "http://CLOUD-PAYMENT-SERVICE";
 
     @Resource
     private RestTemplate restTemplate;
