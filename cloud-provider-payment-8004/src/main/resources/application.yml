@@ -1,9 +1,9 @@
 server:
-  port: 8002
+  port: 8004
 
 spring:
   application:
-    name: cloud-payment-com.lisen.springcloud.service #服务实例名称, 在eureka注册中心可以看到这个名字, 如果注册到eureka的话
+    name: cloud-provider-payment #服务实例名称, 注册zookeeper到注册中心
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource            # 当前数据源操作类型
     driver-class-name: org.gjt.mm.mysql.Driver              # mysql驱动包
@@ -15,20 +15,10 @@ spring:
       test-while-idle: true
   devtools:
     add-properties: true
+  cloud:
+    zookeeper:
+      connect-string: 103.192.179.239:2181
 
 mybatis:
   mapperLocations: classpath:mapper/*.xml
   type-aliases-package: com.lisen.springcloud.com.lisen.springcloud.entities    # 所有Entity别名类所在包
-
-eureka:
-  client:
-    # 将实例注册到这些个url地址,
-    service-url:
-      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
-    # 是否注册: 是
-    register-with-eureka: true
-    # 是否检索服务: 是, 单节点无所谓, 集群环境必须为true才能配合ribbon使用负载均衡
-    fetch-registry: true
-  instance:
-    instance-id: payment8002
-    prefer-ip-address: true
