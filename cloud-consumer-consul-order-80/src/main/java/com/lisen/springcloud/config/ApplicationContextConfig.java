@@ -16,8 +16,7 @@ public class ApplicationContextConfig {
     @Bean
     // @LoadBalanced是eureka默认的负载均衡机制, 集群环境调用服务名称通过这个自动分配(轮询方式,1:1分配,一次a实例, 一次b实例),
     // 不添加注解会报错: 服务名称; nested exception is java.net.UnknownHostException: 服务名称,他不知道用哪个服务实例
-//    @LoadBalanced // 不使用注解,使用自己手写的负载均衡算法
-
+    @LoadBalanced
     public RestTemplate getRestTemplate()
     {
         return new RestTemplate();

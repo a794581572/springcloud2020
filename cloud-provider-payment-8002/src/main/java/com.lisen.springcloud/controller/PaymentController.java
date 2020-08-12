@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author lisen
@@ -58,5 +59,26 @@ public class PaymentController {
         }else {
             return new CommonResult(444, "无此记录，查询ID："+id, null);
         }
+    }
+
+
+    /**
+     * 自定义轮询
+     * @return
+     */
+    @GetMapping(value = "/lb")
+    public String getPaymentLB() {
+        return serverPort;
+    }
+
+    @GetMapping(value = "/feign/timeout")
+    public String paymentFeignTimeout() {
+        // 业务逻辑处理正确，但是需要耗费3秒钟
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return serverPort;
     }
 }

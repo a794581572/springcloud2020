@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: cloud-payment-com.lisen.springcloud.service #服务实例名称, 在eureka注册中心可以看到这个名字, 如果注册到eureka的话
+    name: cloud-payment-service #服务实例名称, 在eureka注册中心可以看到这个名字, 如果注册到eureka的话
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource            # 当前数据源操作类型
     driver-class-name: org.gjt.mm.mysql.Driver              # mysql驱动包
