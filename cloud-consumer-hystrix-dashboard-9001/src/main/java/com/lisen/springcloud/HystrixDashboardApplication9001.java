@@ -10,6 +10,7 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
  */
 @SpringBootApplication
 // 注解声明, 这里是熔断监控服务
+// 启动路径: ip:port/hystrix
 @EnableHystrixDashboard
 public class HystrixDashboardApplication9001 {
     public static void main(String[] args) {
