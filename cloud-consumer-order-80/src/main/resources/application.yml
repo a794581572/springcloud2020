@@ -4,6 +4,13 @@ server:
 spring:
   application:
     name: cloud-order-service
+  # Sleuth监控8001服务并在9411图形化显示
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    sleuth:
+      sampler:
+      #采样率值介于 0 到 1 之间，1 则表示全部采集
+      probability: 1
 
 eureka:
   client:

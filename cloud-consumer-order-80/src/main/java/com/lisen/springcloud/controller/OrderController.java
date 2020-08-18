@@ -4,6 +4,7 @@ import com.lisen.springcloud.entities.Payment;
 import com.lisen.springcloud.loadbalancer.LoadBalancer;
 import com.lisen.springcloud.vo.CommonResult;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +45,8 @@ public class OrderController {
     private LoadBalancer loadBalancer;
     @Resource
     private DiscoveryClient discoveryClient;
+    @Value("${server.port}")
+    private String serverPort;
 
     /**
      * 消费者使用RestTemplate.postForObject(url,参数,返回类型(这里是我们封装的json格式))方法请求生产者
@@ -87,4 +90,12 @@ public class OrderController {
         return restTemplate.getForObject(url, String.class);
     }
 
+    /**
+     * 链路追踪
+     * @return
+     */
+    @GetMapping("/zipkin")
+    public String paymentZipkin(){
+        return restTemplate.getForObject("http://127.0.0.1:8001"+"/payment/zipkin", String.class);
+    }
 }

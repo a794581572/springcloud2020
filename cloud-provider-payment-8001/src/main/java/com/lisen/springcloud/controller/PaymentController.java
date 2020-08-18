@@ -103,4 +103,13 @@ public class PaymentController {
         }
         return serverPort;
     }
+
+    /**
+     * 链路追踪
+     * @return
+     */
+    @GetMapping("/zipkin")
+    public String paymentZipkin(){
+        return "这里是链路追踪, port: " + serverPort;
+    }
 }
